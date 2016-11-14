@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/Brett/Desktop/Everything/1.8.8 Spigot Server/spigot-1.8.8-R0.1-SNAPSHOT.jar">
+	<classpathentry kind="lib" path="C:/Users/Brett/Desktop/1.10.2 Test Server/spigot-1.10.2.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
 		</attributes>

@@ -37,6 +37,7 @@ public class TerminalUI implements Listener
 		
 		for (TerminalChest c : terminal.getChests())
 		{
+			c.constructMapping();
 			for (ItemStack item : c.getChest().getInventory().getContents())
 			{
 				if (item != null)
@@ -156,6 +157,7 @@ public class TerminalUI implements Listener
 	{
 		Inventory clicked = event.getClickedInventory();
 		System.out.println((clicked == null) + " " + (event.getClickedInventory()));
+		// Is the clicked inventory the terminal inventory?
 		if (clicked != null && inv != null && clicked.hashCode() == inv.hashCode())
 		{
 			event.setCancelled(true);
@@ -186,7 +188,7 @@ public class TerminalUI implements Listener
 			// Is the clicked slot in the first three rows and not air?
 			else if (event.getSlot() < 27 && event.getCurrentItem().getType() != Material.AIR)
 			{
-				CompressedItem ci = items.get(itemAtInStorage(event.getSlot()));
+				CompressedItem ci = getCompressedItem(event.getCurrentItem()); // TODO: ERROR HERE!!
 				ItemStack selected = ci.getItem();
 				if (event.getAction() == InventoryAction.PICKUP_ALL)
 				{
@@ -281,7 +283,7 @@ public class TerminalUI implements Listener
 		else if (clicked != inv && inv != null && event.getView().getTopInventory().hashCode() == inv.hashCode())
 		{
 			System.out.println("LJSDP");
-			if (event.getCurrentItem().getType() != Material.AIR)
+			if (event.getCurrentItem().getType() != Material.AIR) // TODO: ERROR HERE
 			{
 				ItemStack selected = event.getCurrentItem();
 				CompressedItem ci = getItemInStorage(selected);
@@ -309,6 +311,18 @@ public class TerminalUI implements Listener
 				update();
 			}
 		}
+	}
+	
+	public CompressedItem getCompressedItem(ItemStack item)
+	{
+		for (CompressedItem ci : items)
+		{
+			if (ci.getItem().isSimilar(item))
+			{
+				return ci;
+			}
+		}
+		return null;
 	}
 	
 	public static class CompressedItem
